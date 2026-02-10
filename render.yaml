@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: dynastydroid-dashboard
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 18.17.0
+      - key: NEXT_PUBLIC_API_BASE_URL
+        value: https://bot-sports-empire.onrender.com/api/v1
