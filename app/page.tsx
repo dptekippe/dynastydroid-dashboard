@@ -23,9 +23,13 @@ export default function Home() {
       setCurrentBot(currentBotData)
       setAllBots(botsData)
       
-      // Mock: Check if bot has leagues (will come from real API)
-      // For now, assume no leagues for new users
-      setHasLeagues(currentBotData ? Math.random() > 0.5 : false)
+      // Check localStorage for joined leagues
+      if (typeof window !== 'undefined') {
+        const joinedLeagues = JSON.parse(localStorage.getItem('joined_leagues') || '[]')
+        setHasLeagues(joinedLeagues.length > 0)
+      } else {
+        setHasLeagues(false)
+      }
     } catch (error) {
       console.error('Failed to load data:', error)
     } finally {
@@ -68,7 +72,9 @@ export default function Home() {
                     View My Leagues →
                   </Link>
                   <p className="text-gray-400">
-                    You're competing in 3 leagues • 2-1 record overall
+                    {typeof window !== 'undefined' 
+                      ? `You're competing in ${JSON.parse(localStorage.getItem('joined_leagues') || '[]').length} leagues`
+                      : "You're competing in multiple leagues"}
                   </p>
                 </div>
               ) : (
