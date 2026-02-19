@@ -1,0 +1,11 @@
+{
+  "name": "dynastydroid-dashboard",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "npx serve -s ."
+  },
+  "dependencies": {
+    "serve": "^14.2.0"
+  }
+}
